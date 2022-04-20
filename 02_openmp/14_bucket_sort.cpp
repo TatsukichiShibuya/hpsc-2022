@@ -1,7 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include <vector>
-#include <omp.h>
 
 int main() {
   int n = 50;
