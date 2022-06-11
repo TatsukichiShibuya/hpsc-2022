@@ -1,4 +1,12 @@
 22M30965
+# Report
+* Lecture 2    -> 02_openmp/{12_pi.cpp, 13_merge_sort.cpp, 14_bucket_sort.cpp}
+* Lecture 3    -> 03_mpi/11_distributed.cpp
+* Lecture 4    -> 04_simd/13_nbody.cpp
+* Lecture 6    -> 06_cuda/12_bucket_sort.cu
+* Lecture 10   -> 10_io/{16_phdf5_write.cpp, 17_phdf5_read.cpp}
+* Final Report -> 14_pde/{10_cavity.cpp, 10_cavity.cu}
+
 # hpc_lecture
 
 |          | Topic                                | Sample code               |
