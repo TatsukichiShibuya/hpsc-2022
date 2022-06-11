@@ -1,7 +1,7 @@
-#include <iostream>
+#include <stdio.h>
 #include <cmath>
 
-const int nx = 41, ny = 41, nt = 10, nit = 50;
+const int nx = 41, ny = 41, nt = 500, nit = 50;
 const double dx = 2/(double)(nx - 1), dy = 2/(double)(ny - 1), dt = 0.01;
 const double dtdx = dt/dx, dtdy = dt/dy;
 const double dx2 = std::pow(dx,2), dy2 = std::pow(dy,2);
@@ -23,7 +23,7 @@ int main() {
       for (int i=1; i<nx-1; i++) {
         double dudx = (u[j][i+1] - u[j][i-1])/(2*dx), dudy = (u[j+1][i] - u[j-1][i])/(2*dy);
         double dvdx = (v[j][i+1] - v[j][i-1])/(2*dx), dvdy = (v[j+1][i] - v[j-1][i])/(2*dy);
-        b[j][i] = rho * ((dudx + dvdy)/dt - (std::pow(dudx,2) + 2*dudy*dvdx + std::pow(dvdy,2)));
+        b[j][i] = rho*((dudx + dvdy)/dt - (std::pow(dudx,2) + 2*dudy*dvdx + std::pow(dvdy,2)));
       }
     }
 
@@ -34,7 +34,6 @@ int main() {
           pn[j][i] = p[j][i];
         }
       }
-
       for (int j=1; j<ny-1; j++) {
         for (int i=1; i<nx-1; i++) {
           p[j][i] = ((pn[j][i+1] + pn[j][i-1])*dy2 + (pn[j+1][i] + pn[j-1][i])*dx2 - b[j][i]*dx2*dy2)/(2*(dx2 + dy2));
@@ -42,7 +41,7 @@ int main() {
       }
       for (int i=0; i<nx; i++) {
         p[0][i] = p[1][i];
-        p[nx-1][i] = 0.0;
+        p[ny-1][i] = 0.0;
       }
       for (int j=0; j<ny; j++) {
         p[j][nx-1] = p[j][nx-2];
@@ -63,7 +62,6 @@ int main() {
         du -= un[j][i]*dtdx*(un[j][i] - un[j][i-1]);
         du -= vn[j][i]*dtdy*(un[j][i] - un[j-1][i]);
         du -= (dtdx/(2*rho))*(p[j][i+1] - p[j][i-1]);
-
         du += nu*dtdx2*(un[j][i+1] - 2*un[j][i] + un[j][i-1]);
         du += nu*dtdy2*(un[j+1][i] - 2*un[j][i] + un[j-1][i]);
         u[j][i] = un[j][i] + du;
@@ -90,5 +88,7 @@ int main() {
       v[j][0] = 0.0;
       v[j][nx-1] = 0.0;
     }
+    printf("(%f, %f)\n", u[10][10], v[10][10]);
   }
 }
+
